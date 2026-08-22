@@ -1,0 +1,1656 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SKY GEMS — Not Just A Stone. A Story Frozen In Light.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <style>
+      :root {
+        --ink: #07090f;
+        --ink-2: #0d1122;
+        --surface: #141a33;
+        --surface-2: #1b2242;
+        --line: rgba(201, 164, 97, 0.16);
+        --text: #eef0f8;
+        --muted: #8b93b0;
+        --gold: #c9a461;
+        --gold-soft: #e4c98c;
+        --sapphire: #4869d6;
+        --emerald: #2f9d74;
+        --ruby: #c23c56;
+        --amethyst: #8862c9;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--ink);
+      }
+      body {
+        color: var(--text);
+        font-family: "Work Sans", sans-serif;
+        overflow-x: hidden;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Fraunces", serif;
+        font-weight: 500;
+        margin: 0;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+        background: none;
+      }
+      ::selection {
+        background: var(--gold);
+        color: var(--ink);
+      }
+      .eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.001ms !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--gold-soft);
+        outline-offset: 3px;
+      }
+
+      /* ===== NAV ===== */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.3rem clamp(1.5rem, 5vw, 3.5rem);
+        mix-blend-mode: normal;
+      }
+      .logo {
+        font-family: "Fraunces", serif;
+        font-size: 1.2rem;
+        letter-spacing: 0.16em;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      nav ul {
+        display: flex;
+        gap: 2.2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      nav a {
+        font-size: 0.8rem;
+        color: var(--muted);
+        letter-spacing: 0.03em;
+        transition: color 0.3s ease;
+      }
+      nav a:hover {
+        color: var(--gold-soft);
+      }
+      @media (max-width: 900px) {
+        nav {
+          display: none;
+        }
+      }
+
+      /* ===== GRAIN / VIGNETTE OVERLAY ===== */
+      .grain {
+        position: fixed;
+        inset: 0;
+        z-index: 150;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+        mix-blend-mode: overlay;
+      }
+      .vignette {
+        position: fixed;
+        inset: 0;
+        z-index: 149;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse at center,
+          transparent 40%,
+          rgba(0, 0, 0, 0.55) 100%
+        );
+      }
+
+      /* ===== CINEMATIC PINNED STAGE (Scenes 1-5) ===== */
+      .cine-wrap {
+        position: relative;
+        height: 600vh;
+      }
+      .cine-stage {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: var(--ink);
+      }
+      .cine-bg {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 55% 45% at 50% 45%,
+            rgba(72, 105, 214, 0.1),
+            transparent 65%
+          ),
+          var(--ink);
+      }
+      .spotlight {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle 380px at 50% 46%,
+          rgba(255, 244, 214, 0.1),
+          transparent 70%
+        );
+        opacity: 0;
+      }
+      .dust {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+      .dust span {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        border-radius: 50%;
+        background: var(--gold-soft);
+        opacity: 0;
+      }
+      .gem-center {
+        position: relative;
+        z-index: 5;
+        width: min(46vw, 480px);
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .gem-center svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .rough-crystal {
+        transition: none;
+      }
+      .facet-cut {
+        transform-origin: center;
+        transform-box: fill-box;
+      }
+
+      .scene-copy {
+        position: absolute;
+        z-index: 10;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 12%;
+        text-align: center;
+        width: 100%;
+        max-width: 640px;
+        padding: 0 1.5rem;
+        opacity: 0;
+      }
+      .scene-copy .eyebrow {
+        display: block;
+        margin-bottom: 0.8rem;
+      }
+      .scene-copy h2 {
+        font-size: clamp(1.6rem, 4vw, 2.6rem);
+        line-height: 1.2;
+      }
+
+      .origin-line {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+      }
+      .origin-line svg {
+        width: 100%;
+        height: 100%;
+      }
+      .origin-dot {
+        filter: drop-shadow(0 0 6px var(--gold));
+      }
+
+      .progress-rail {
+        position: fixed;
+        right: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 160;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      @media (max-width: 900px) {
+        .progress-rail {
+          display: none;
+        }
+      }
+      .progress-rail .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--line);
+        transition:
+          background 0.3s ease,
+          transform 0.3s ease;
+      }
+      .progress-rail .dot.active {
+        background: var(--gold);
+        transform: scale(1.4);
+      }
+
+      /* ===== HERO HEADLINE (over scene 1) ===== */
+      .hero-headline {
+        position: absolute;
+        z-index: 20;
+        top: 14%;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        width: 100%;
+        opacity: 1;
+      }
+      .hero-headline h1 {
+        font-size: clamp(2rem, 5vw, 3.6rem);
+        line-height: 1.1;
+      }
+      .hero-headline h1 em {
+        font-style: italic;
+        color: var(--gold-soft);
+      }
+      .hero-headline .eyebrow {
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .hero-cta {
+        position: absolute;
+        z-index: 20;
+        bottom: 6%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 1.2rem;
+        opacity: 1;
+      }
+      .btn-primary {
+        background: var(--gold);
+        color: var(--ink);
+        padding: 0.95rem 1.9rem;
+        font-size: 0.85rem;
+        letter-spacing: 0.05em;
+        font-weight: 500;
+        border-radius: 2px;
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease,
+          background 0.25s ease;
+        display: inline-block;
+      }
+      .btn-primary:hover {
+        background: var(--gold-soft);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px -8px rgba(201, 164, 97, 0.5);
+      }
+      .btn-ghost {
+        color: var(--text);
+        font-size: 0.85rem;
+        align-self: center;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 0.3rem;
+        transition:
+          border-color 0.3s ease,
+          color 0.3s ease;
+      }
+      .btn-ghost:hover {
+        border-color: var(--gold);
+        color: var(--gold-soft);
+      }
+      .scroll-cue {
+        position: absolute;
+        bottom: 2.2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--muted);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.14em;
+      }
+      .scroll-cue .line {
+        width: 1px;
+        height: 34px;
+        background: linear-gradient(var(--gold), transparent);
+        animation: pulse-line 2.2s ease-in-out infinite;
+      }
+      @keyframes pulse-line {
+        0%,
+        100% {
+          opacity: 0.25;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* ===== SCENE 6: ORBIT ===== */
+      .orbit-wrap {
+        position: relative;
+        height: 400vh;
+      }
+      .orbit-stage {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--ink);
+        overflow: hidden;
+      }
+      .orbit-bg {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 60% 50% at 50% 50%,
+          rgba(136, 98, 201, 0.08),
+          transparent 65%
+        );
+      }
+      .orbit-center {
+        position: relative;
+        z-index: 5;
+        width: min(22vw, 220px);
+        aspect-ratio: 1/1;
+      }
+      .orbit-center svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .orbit-ring {
+        position: absolute;
+        z-index: 4;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+      }
+      .orbit-sat {
+        position: absolute;
+        z-index: 6;
+        width: 42px;
+        height: 42px;
+        top: 50%;
+        left: 50%;
+        margin: -21px 0 0 -21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .orbit-sat svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 0 8px currentColor);
+      }
+      .orbit-sat img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow:
+          0 0 14px rgba(0, 0, 0, 0.5),
+          0 0 0 2px rgba(228, 201, 140, 0.35);
+      }
+      .orbit-copy {
+        position: absolute;
+        z-index: 10;
+        top: 14%;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        width: 100%;
+        max-width: 600px;
+        padding: 0 1.5rem;
+        opacity: 0;
+      }
+      .orbit-copy h2 {
+        font-size: clamp(1.6rem, 4vw, 2.4rem);
+      }
+
+      /* ===== SCENE 7: PORTFOLIO SPLIT ===== */
+      .split-wrap {
+        position: relative;
+        height: 420vh;
+      }
+      .split-stage {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--ink);
+        overflow: hidden;
+      }
+      .split-copy {
+        position: absolute;
+        z-index: 10;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        width: 100%;
+        max-width: 600px;
+        padding: 0 1.5rem;
+        opacity: 0;
+      }
+      .split-copy h2 {
+        font-size: clamp(1.6rem, 4vw, 2.4rem);
+      }
+      .split-center {
+        position: absolute;
+        z-index: 5;
+        width: min(30vw, 300px);
+        aspect-ratio: 1/1;
+        opacity: 1;
+      }
+      .split-center svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .split-card {
+        position: absolute;
+        z-index: 8;
+        width: min(70vw, 220px);
+        background: var(--ink-2);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 1.6rem;
+        top: 50%;
+        left: 50%;
+        margin: -140px 0 0 -110px;
+        opacity: 0;
+      }
+      .split-card .swatch {
+        width: 100%;
+        aspect-ratio: 1/1;
+        border-radius: 3px;
+        margin-bottom: 1rem;
+        overflow: hidden;
+      }
+      .split-card .swatch img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .split-card h3 {
+        font-size: 1.05rem;
+      }
+      .split-card .meta {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--gold-soft);
+        letter-spacing: 0.06em;
+        margin-top: 0.4rem;
+      }
+
+      /* ===== SCENE 8: FINAL HOLD ===== */
+      .final-wrap {
+        position: relative;
+        height: 100vh;
+      }
+      .final-stage {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(
+          ellipse 70% 60% at 50% 55%,
+          rgba(201, 164, 97, 0.1),
+          var(--ink) 70%
+        );
+        text-align: center;
+        padding: 0 1.5rem;
+      }
+      .final-stage h2 {
+        font-size: clamp(1.9rem, 4.6vw, 3.2rem);
+        max-width: 16ch;
+      }
+      .final-stage .eyebrow {
+        margin-bottom: 1.2rem;
+      }
+      .final-stage .btn-primary {
+        margin-top: 2.2rem;
+      }
+      .final-gem {
+        position: absolute;
+        width: min(50vw, 480px);
+        opacity: 0.14;
+        z-index: 0;
+      }
+      .final-gem svg {
+        width: 100%;
+        overflow: visible;
+      }
+
+      /* ===== WHY / TRUST SECTION ===== */
+      section.plain {
+        padding: 8rem clamp(1.5rem, 5vw, 3.5rem);
+        position: relative;
+      }
+      .section-inner {
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+      .section-head {
+        max-width: 640px;
+        margin-bottom: 3.5rem;
+      }
+      .section-head h2 {
+        font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+        margin-top: 0.8rem;
+      }
+      .section-head p {
+        color: var(--muted);
+        margin-top: 1rem;
+        line-height: 1.7;
+      }
+      .trust-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--line);
+        border: 1px solid var(--line);
+      }
+      .trust-card {
+        background: var(--ink-2);
+        padding: 2.2rem 1.6rem;
+        transition: background 0.4s ease;
+      }
+      .trust-card:hover {
+        background: var(--surface);
+      }
+      .trust-card .num {
+        font-family: "IBM Plex Mono", monospace;
+        color: var(--gold);
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+      }
+      .trust-card h3 {
+        font-size: 1.15rem;
+        margin: 0.9rem 0 0.6rem;
+      }
+      .trust-card p {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      /* stat counters */
+      .stats-row {
+        display: flex;
+        gap: 3rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+      }
+      .stat {
+      }
+      .stat .val {
+        font-family: "Fraunces", serif;
+        font-size: 2.4rem;
+        color: var(--gold-soft);
+      }
+      .stat .label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        text-transform: uppercase;
+        margin-top: 0.3rem;
+      }
+
+      /* testimonials */
+      .testimonial-track {
+        overflow: hidden;
+        position: relative;
+        mask-image: linear-gradient(
+          90deg,
+          transparent,
+          black 8%,
+          black 92%,
+          transparent
+        );
+      }
+      .testimonial-strip {
+        display: flex;
+        gap: 2rem;
+        width: max-content;
+        animation: scroll-strip 40s linear infinite;
+      }
+      .testimonial-strip:hover {
+        animation-play-state: paused;
+      }
+      @keyframes scroll-strip {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      .t-card {
+        width: 360px;
+        flex: 0 0 auto;
+        background: var(--ink-2);
+        border: 1px solid var(--line);
+        padding: 1.9rem;
+        border-radius: 3px;
+      }
+      .t-card p.quote {
+        font-family: "Fraunces", serif;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        font-style: italic;
+      }
+      .t-card .who {
+        margin-top: 1.2rem;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        color: var(--gold-soft);
+        text-transform: uppercase;
+      }
+
+      /* interactive vault menu */
+      .vault-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.6rem;
+      }
+      .vault-piece {
+        position: relative;
+        border-radius: 3px;
+        aspect-ratio: 3/4;
+        background: linear-gradient(150deg, var(--surface-2), var(--ink-2));
+        border: 1px solid var(--line);
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .vault-piece .shine {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .vault-piece .shine img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(1.15) contrast(1.05) brightness(0.92);
+        transition:
+          transform 0.6s ease,
+          filter 0.6s ease;
+      }
+      .vault-piece:hover .shine img {
+        transform: scale(1.1);
+        filter: saturate(1.3) contrast(1.1) brightness(1);
+      }
+      .vault-info {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 1.1rem 1.2rem;
+        background: linear-gradient(0deg, rgba(7, 9, 15, 0.94), transparent);
+        transform: translateY(60%);
+        opacity: 0;
+        transition:
+          transform 0.35s ease,
+          opacity 0.35s ease;
+      }
+      .vault-piece:hover .vault-info {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .vault-info .name {
+        font-family: "Fraunces", serif;
+        font-size: 1rem;
+      }
+      .vault-info .price {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.8rem;
+        color: var(--gold-soft);
+        margin-top: 0.5rem;
+      }
+      .vault-info .row {
+        display: flex;
+        justify-content: space-between;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--muted);
+        margin-top: 0.3rem;
+      }
+
+      footer {
+        padding: 3rem clamp(1.5rem, 5vw, 3.5rem) 2.4rem;
+        border-top: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+      }
+      footer a {
+        color: var(--muted);
+        font-size: 0.8rem;
+        transition: color 0.3s ease;
+      }
+      footer a:hover {
+        color: var(--gold-soft);
+      }
+      .foot-links {
+        display: flex;
+        gap: 1.6rem;
+      }
+      .copy {
+        color: var(--muted);
+        font-size: 0.75rem;
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      @media (max-width: 900px) {
+        .trust-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .vault-grid {
+          grid-template-columns: 1fr;
+        }
+        .split-card {
+          width: min(80vw, 240px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grain"></div>
+    <div class="vignette"></div>
+
+    <header>
+      <div class="logo">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+          <path
+            d="M12 2L3 9l9 13 9-13-9-7z"
+            stroke="#c9a461"
+            stroke-width="1.2"
+          />
+        </svg>
+        SKY GEMS
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#trust">Why Us</a></li>
+          <li><a href="#vault">The Vault</a></li>
+          <li><a href="#contact">Inquire</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ============ CINEMATIC SCENES 1-5 (PINNED) ============ -->
+    <div class="cine-wrap" id="cineWrap">
+      <div class="cine-stage" id="cineStage">
+        <div class="cine-bg"></div>
+        <div class="spotlight" id="spotlight"></div>
+        <div class="dust" id="dust"></div>
+
+        <div class="hero-headline" id="heroHeadline">
+          <span class="eyebrow">Est. Kerala · Private Collection</span>
+          <h1>Not Just A Stone.<br />A Story Frozen In <em>Light.</em></h1>
+        </div>
+
+        <div class="origin-line" id="originLine">
+          <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">
+            <path
+              id="originPath"
+              d="M 120 480 C 300 380, 380 300, 480 260 C 600 210, 700 180, 860 130"
+              fill="none"
+              stroke="var(--line)"
+              stroke-width="1"
+            />
+            <circle
+              id="originDot"
+              class="origin-dot"
+              r="4"
+              fill="var(--gold-soft)"
+            />
+          </svg>
+        </div>
+
+        <div class="gem-center" id="gemCenter">
+          <svg viewBox="0 0 400 400" id="gemSvg">
+            <path
+              class="rough-crystal"
+              id="roughCrystal"
+              d="M200,60 L250,100 L270,160 L230,230 L200,300 L170,230 L130,160 L150,100 Z"
+              fill="none"
+              stroke="#3a4470"
+              stroke-width="1.5"
+              opacity="0.9"
+            />
+            <g id="gemFacets">
+              <polygon
+                class="facet-cut"
+                data-i="0"
+                points="200,40 260,110 200,150 140,110"
+                fill="#2a3562"
+                opacity="0"
+              />
+              <polygon
+                class="facet-cut"
+                data-i="1"
+                points="260,110 340,140 260,190 200,150"
+                fill="#33407a"
+                opacity="0"
+              />
+              <polygon
+                class="facet-cut"
+                data-i="2"
+                points="140,110 200,150 140,190 60,140"
+                fill="#26305c"
+                opacity="0"
+              />
+              <polygon
+                class="facet-cut"
+                data-i="3"
+                points="200,150 260,190 220,260 180,260"
+                fill="#3b498c"
+                opacity="0"
+              />
+              <polygon
+                class="facet-cut"
+                data-i="4"
+                points="140,190 200,150 180,260 100,240"
+                fill="#2d3868"
+                opacity="0"
+              />
+              <polygon
+                class="facet-cut"
+                data-i="5"
+                points="260,190 340,140 320,220 220,260"
+                fill="#455498"
+                opacity="0"
+              />
+              <polygon
+                class="facet-cut"
+                data-i="6"
+                points="60,140 140,190 100,240 40,200"
+                fill="#232c54"
+                opacity="0"
+              />
+              <polygon
+                class="facet-cut"
+                data-i="7"
+                points="180,260 220,260 200,340"
+                fill="#4c5aa3"
+                opacity="0"
+              />
+              <polygon
+                class="facet-cut"
+                data-i="8"
+                points="100,240 180,260 200,340 130,300"
+                fill="#38447f"
+                opacity="0"
+              />
+              <polygon
+                class="facet-cut"
+                data-i="9"
+                points="220,260 320,220 260,300 200,340"
+                fill="#4159ac"
+                opacity="0"
+              />
+              <polygon
+                class="facet-cut"
+                data-i="10"
+                points="40,200 100,240 130,300 70,260"
+                fill="#1f2850"
+                opacity="0"
+              />
+              <polygon
+                class="facet-cut"
+                data-i="11"
+                points="320,220 340,140 360,190"
+                fill="#5164b8"
+                opacity="0"
+              />
+            </g>
+          </svg>
+        </div>
+
+        <div class="scene-copy" id="scene1Copy">
+          <span class="eyebrow">Scene One</span>
+          <h2>Every Gem Begins in the Dark</h2>
+        </div>
+        <div class="scene-copy" id="scene2Copy">
+          <span class="eyebrow">Scene Two</span>
+          <h2>Cut for Character, Not Convenience</h2>
+        </div>
+        <div class="scene-copy" id="scene3Copy">
+          <span class="eyebrow">Scene Three</span>
+          <h2>Watch It Breathe Light</h2>
+        </div>
+        <div class="scene-copy" id="scene4Copy">
+          <span class="eyebrow">Scene Four</span>
+          <h2>From the Earth to the Hand</h2>
+        </div>
+        <div class="scene-copy" id="scene5Copy">
+          <span class="eyebrow">Scene Five</span>
+          <h2>Nature Doesn't Apologize for Its Marks</h2>
+        </div>
+
+        <div class="hero-cta" id="heroCta">
+          <a href="#vault" class="btn-primary">Enter the Collection</a>
+          <a href="#trust" class="btn-ghost">Why Collectors Trust Us</a>
+        </div>
+        <div class="scroll-cue" id="scrollCue">
+          <div class="line"></div>
+          SCROLL
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCENE 6: GEM GALAXY ORBIT ============ -->
+    <div class="orbit-wrap">
+      <div class="orbit-stage" id="orbitStage">
+        <div class="orbit-bg"></div>
+        <div class="orbit-copy" id="orbitCopy">
+          <span class="eyebrow">Scene Six</span>
+          <h2>A Collection, Not a Catalog</h2>
+        </div>
+        <div
+          class="orbit-ring"
+          id="ring1"
+          style="width: 280px; height: 280px; margin: -140px 0 0 -140px"
+        ></div>
+        <div
+          class="orbit-ring"
+          id="ring2"
+          style="width: 420px; height: 420px; margin: -210px 0 0 -210px"
+        ></div>
+        <div class="orbit-center">
+          <svg viewBox="0 0 400 400">
+            <g>
+              <polygon points="200,40 260,110 200,150 140,110" fill="#33407a" />
+              <polygon
+                points="260,110 340,140 260,190 200,150"
+                fill="#455498"
+              />
+              <polygon points="140,110 200,150 140,190 60,140" fill="#2d3868" />
+              <polygon
+                points="200,150 260,190 220,260 180,260"
+                fill="#4c5aa3"
+              />
+              <polygon
+                points="140,190 200,150 180,260 100,240"
+                fill="#38447f"
+              />
+              <polygon
+                points="260,190 340,140 320,220 220,260"
+                fill="#5164b8"
+              />
+            </g>
+          </svg>
+        </div>
+        <div class="orbit-sat" id="sat0">
+          <img
+            src="https://images.unsplash.com/photo-1613843351058-1dd06fda7c02?fm=jpg&q=70&w=200&auto=format&fit=crop"
+            alt="Sapphire"
+            loading="lazy"
+          />
+        </div>
+        <div class="orbit-sat" id="sat1">
+          <img
+            src="https://images.unsplash.com/photo-1625479610681-f789345a8157?fm=jpg&q=70&w=200&auto=format&fit=crop"
+            alt="Emerald"
+            loading="lazy"
+          />
+        </div>
+        <div class="orbit-sat" id="sat2">
+          <img
+            src="https://images.unsplash.com/photo-1551122102-63cd339bfaab?fm=jpg&q=70&w=200&auto=format&fit=crop"
+            alt="Ruby"
+            loading="lazy"
+          />
+        </div>
+        <div class="orbit-sat" id="sat3">
+          <img
+            src="https://images.unsplash.com/photo-1551947391-249dcb8ed976?fm=jpg&q=70&w=200&auto=format&fit=crop"
+            alt="Amethyst"
+            loading="lazy"
+          />
+        </div>
+        <div class="orbit-sat" id="sat4">
+          <img
+            src="https://images.unsplash.com/photo-1621329109234-d7657d2f3846?fm=jpg&q=70&w=200&auto=format&fit=crop"
+            alt="Assorted gemstones"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCENE 7: PORTFOLIO SPLIT ============ -->
+    <div class="split-wrap">
+      <div class="split-stage" id="splitStage">
+        <div class="split-copy" id="splitCopy">
+          <span class="eyebrow">Scene Seven</span>
+          <h2>Five Stones. Five Personalities.</h2>
+        </div>
+        <div class="split-center" id="splitCenter">
+          <svg viewBox="0 0 400 400">
+            <g>
+              <polygon points="200,40 260,110 200,150 140,110" fill="#33407a" />
+              <polygon
+                points="260,110 340,140 260,190 200,150"
+                fill="#455498"
+              />
+              <polygon points="140,110 200,150 140,190 60,140" fill="#2d3868" />
+              <polygon
+                points="200,150 260,190 220,260 180,260"
+                fill="#4c5aa3"
+              />
+              <polygon
+                points="140,190 200,150 180,260 100,240"
+                fill="#38447f"
+              />
+              <polygon
+                points="260,190 340,140 320,220 220,260"
+                fill="#5164b8"
+              />
+            </g>
+          </svg>
+        </div>
+        <div class="split-card" id="card0">
+          <div class="swatch">
+            <img
+              src="https://images.unsplash.com/photo-1613843351058-1dd06fda7c02?fm=jpg&q=80&w=600&auto=format&fit=crop"
+              alt="Blue sapphire gemstone"
+              loading="lazy"
+            />
+          </div>
+          <h3>Royal Ceylon Sapphire</h3>
+          <div class="meta">4.82 CT · SRI LANKA</div>
+        </div>
+        <div class="split-card" id="card1">
+          <div class="swatch">
+            <img
+              src="https://images.unsplash.com/photo-1625479610681-f789345a8157?fm=jpg&q=80&w=600&auto=format&fit=crop"
+              alt="Raw emerald crystal"
+              loading="lazy"
+            />
+          </div>
+          <h3>Muzo Emerald</h3>
+          <div class="meta">3.10 CT · COLOMBIA</div>
+        </div>
+        <div class="split-card" id="card2">
+          <div class="swatch">
+            <img
+              src="https://images.unsplash.com/photo-1551122102-63cd339bfaab?fm=jpg&q=80&w=600&auto=format&fit=crop"
+              alt="Red ruby gemstone macro"
+              loading="lazy"
+            />
+          </div>
+          <h3>Mogok Pigeon Ruby</h3>
+          <div class="meta">2.44 CT · MYANMAR</div>
+        </div>
+        <div class="split-card" id="card3">
+          <div class="swatch">
+            <img
+              src="https://images.unsplash.com/photo-1521133573892-e44906baee46?fm=jpg&q=80&w=600&auto=format&fit=crop"
+              alt="Purple crystal quartz"
+              loading="lazy"
+            />
+          </div>
+          <h3>Brazilian Amethyst Cluster</h3>
+          <div class="meta">5.20 CT · BRAZIL</div>
+        </div>
+        <div class="split-card" id="card4">
+          <div class="swatch">
+            <img
+              src="https://images.unsplash.com/photo-1705575490492-4e91fd97bbb4?fm=jpg&q=80&w=600&auto=format&fit=crop"
+              alt="Assorted colored gemstones"
+              loading="lazy"
+            />
+          </div>
+          <h3>Rainbow Stone Suite</h3>
+          <div class="meta">1.98 CT · ETHIOPIA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCENE 8: FINAL HOLD ============ -->
+    <div class="final-wrap">
+      <div class="final-stage">
+        <div class="final-gem">
+          <svg viewBox="0 0 400 400">
+            <polygon points="200,40 260,110 200,150 140,110" fill="#33407a" />
+            <polygon points="260,110 340,140 260,190 200,150" fill="#455498" />
+            <polygon points="140,110 200,150 140,190 60,140" fill="#2d3868" />
+            <polygon points="200,150 260,190 220,260 180,260" fill="#4c5aa3" />
+          </svg>
+        </div>
+        <span class="eyebrow">Scene Eight</span>
+        <h2>Some Things Are Worth Waiting For</h2>
+        <a href="#contact" class="btn-primary">Inquire About This Stone</a>
+      </div>
+    </div>
+
+    <!-- ============ WHY COLLECTORS TRUST US ============ -->
+    <section class="plain" id="trust">
+      <div class="section-inner">
+        <div class="section-head">
+          <span class="eyebrow">Why Collectors Trust Us</span>
+          <h2>Nothing here is mass-produced.</h2>
+          <p>
+            Every stone is chosen in person, verified independently, and
+            disclosed in full — no shortcuts, no surprises.
+          </p>
+        </div>
+        <div class="trust-grid">
+          <div class="trust-card">
+            <div class="num">01</div>
+            <h3>Personally Sourced</h3>
+            <p>
+              Selected on-site at mines and trusted gem markets, never bought
+              sight-unseen.
+            </p>
+          </div>
+          <div class="trust-card">
+            <div class="num">02</div>
+            <h3>Independently Certified</h3>
+            <p>
+              Graded by accredited gemological laboratories, with full treatment
+              disclosure.
+            </p>
+          </div>
+          <div class="trust-card">
+            <div class="num">03</div>
+            <h3>Never Mass-Produced</h3>
+            <p>
+              Each piece is one of one — no synthetic runs, no bulk imports.
+            </p>
+          </div>
+          <div class="trust-card">
+            <div class="num">04</div>
+            <h3>Full Origin Transparency</h3>
+            <p>
+              Country, mine region, and trade history documented for every stone
+              sold.
+            </p>
+          </div>
+        </div>
+        <div class="stats-row">
+          <div class="stat">
+            <div class="val">1,400+</div>
+            <div class="label">Stones Certified</div>
+          </div>
+          <div class="stat">
+            <div class="val">22</div>
+            <div class="label">Years in Trade</div>
+          </div>
+          <div class="stat">
+            <div class="val">14</div>
+            <div class="label">Countries of Origin</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COLLECTOR NOTES ============ -->
+    <section class="plain" style="padding-left: 0; padding-right: 0">
+      <div
+        class="section-head"
+        style="
+          max-width: 640px;
+          margin-left: clamp(1.5rem, 5vw, 3.5rem);
+          margin-right: auto;
+        "
+      >
+        <span class="eyebrow">Collector Notes</span>
+        <h2>What clients say after the sale.</h2>
+      </div>
+      <div class="testimonial-track">
+        <div class="testimonial-strip">
+          <div class="t-card">
+            <p class="quote">
+              "The lab report arrived before I even asked. Rare, in this trade."
+            </p>
+            <div class="who">— R. Menon, Collector</div>
+          </div>
+          <div class="t-card">
+            <p class="quote">
+              "I've waited three years for a stone like this. Worth every
+              month."
+            </p>
+            <div class="who">— L. Fernandes, Jeweler</div>
+          </div>
+          <div class="t-card">
+            <p class="quote">"It's not a purchase. It's an acquisition."</p>
+            <div class="who">— T. Abraham, Private Client</div>
+          </div>
+          <div class="t-card">
+            <p class="quote">
+              "Patient, precise, and never pushy — the dealer you call first."
+            </p>
+            <div class="who">— S. Nair, Collector</div>
+          </div>
+          <div class="t-card">
+            <p class="quote">
+              "The lab report arrived before I even asked. Rare, in this trade."
+            </p>
+            <div class="who">— R. Menon, Collector</div>
+          </div>
+          <div class="t-card">
+            <p class="quote">
+              "I've waited three years for a stone like this. Worth every
+              month."
+            </p>
+            <div class="who">— L. Fernandes, Jeweler</div>
+          </div>
+          <div class="t-card">
+            <p class="quote">"It's not a purchase. It's an acquisition."</p>
+            <div class="who">— T. Abraham, Private Client</div>
+          </div>
+          <div class="t-card">
+            <p class="quote">
+              "Patient, precise, and never pushy — the dealer you call first."
+            </p>
+            <div class="who">— S. Nair, Collector</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INTERACTIVE VAULT ============ -->
+    <section class="plain" id="vault">
+      <div class="section-inner">
+        <div class="section-head">
+          <span class="eyebrow">The Vault</span>
+          <h2>Currently available.</h2>
+          <p>Hover a stone to see origin, carat weight, and price.</p>
+        </div>
+        <div class="vault-grid">
+          <div class="vault-piece">
+            <div class="shine">
+              <img
+                src="https://images.unsplash.com/photo-1613843351058-1dd06fda7c02?fm=jpg&q=80&w=800&auto=format&fit=crop"
+                alt="Blue sapphire gemstone"
+                loading="lazy"
+              />
+            </div>
+            <div class="vault-info">
+              <div class="name">Royal Ceylon Sapphire</div>
+              <div class="row"><span>4.82 CT</span><span>SRI LANKA</span></div>
+              <div class="price">$18,400</div>
+            </div>
+          </div>
+          <div class="vault-piece">
+            <div class="shine">
+              <img
+                src="https://images.unsplash.com/photo-1625479610681-f789345a8157?fm=jpg&q=80&w=800&auto=format&fit=crop"
+                alt="Raw emerald crystal"
+                loading="lazy"
+              />
+            </div>
+            <div class="vault-info">
+              <div class="name">Muzo Emerald</div>
+              <div class="row"><span>3.10 CT</span><span>COLOMBIA</span></div>
+              <div class="price">$24,900</div>
+            </div>
+          </div>
+          <div class="vault-piece">
+            <div class="shine">
+              <img
+                src="https://images.unsplash.com/photo-1551122102-63cd339bfaab?fm=jpg&q=80&w=800&auto=format&fit=crop"
+                alt="Red ruby gemstone macro"
+                loading="lazy"
+              />
+            </div>
+            <div class="vault-info">
+              <div class="name">Mogok Pigeon Ruby</div>
+              <div class="row"><span>2.44 CT</span><span>MYANMAR</span></div>
+              <div class="price">$31,200</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="plain" id="contact">
+      <div class="section-inner">
+        <div class="section-head">
+          <span class="eyebrow">Inquire</span>
+          <h2>Looking for a particular stone?</h2>
+          <p>
+            Tell us what you're after — color, origin, carat range — and we'll
+            let you know what's available in the vault.
+          </p>
+        </div>
+        <a href="mailto:hello@skygems.example" class="btn-primary"
+          >Email hello@skygems.example</a
+        >
+      </div>
+    </section>
+
+    <footer>
+      <div class="logo">SKY GEMS</div>
+      <div class="foot-links">
+        <a href="#trust">Why Us</a>
+        <a href="#vault">The Vault</a>
+        <a href="#contact">Inquire</a>
+      </div>
+      <div class="copy">© 2026 SKY GEMS — All stones certified</div>
+    </footer>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+
+      /* generate dust particles */
+      const dustEl = document.getElementById("dust");
+      for (let i = 0; i < 40; i++) {
+        const s = document.createElement("span");
+        s.style.left = Math.random() * 100 + "%";
+        s.style.top = Math.random() * 100 + "%";
+        dustEl.appendChild(s);
+      }
+
+      /* ============ MASTER PINNED TIMELINE: SCENES 1-5 ============ */
+      const facets = gsap.utils.toArray(".facet-cut");
+      const rough = document.getElementById("roughCrystal");
+      const gemCenter = document.getElementById("gemCenter");
+
+      const master = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#cineWrap",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+      });
+
+      /* --- Scene 1: arrival --- */
+      master.to("#heroHeadline", { opacity: 1, duration: 0.4 }, 0);
+      master.to("#heroCta", { opacity: 1, duration: 0.3 }, 0);
+      master.to("#scrollCue", { opacity: 1, duration: 0.2 }, 0);
+      master.to(".spotlight", { opacity: 1, duration: 0.6 }, 0.05);
+      master.to(
+        ".dust span",
+        { opacity: 0.5, duration: 0.5, stagger: 0.01 },
+        0.1,
+      );
+      master.to(
+        "#gemCenter",
+        { scale: 1, rotateY: 20, duration: 0.8, ease: "none" },
+        0,
+      );
+
+      master.to(
+        ["#heroHeadline", "#heroCta", "#scrollCue"],
+        { opacity: 0, duration: 0.3 },
+        0.55,
+      );
+      master.to("#scene1Copy", { opacity: 1, duration: 0.3 }, 0.6);
+      master.to("#scene1Copy", { opacity: 0, duration: 0.3 }, 0.95);
+
+      /* --- Scene 2: ingredient/facet cut reveal --- */
+      master.to(rough, { opacity: 0, duration: 0.3 }, 1.0);
+      facets.forEach((f, i) => {
+        master.fromTo(
+          f,
+          { opacity: 0, scale: 0.6 },
+          {
+            opacity: 1,
+            scale: 1,
+            transformOrigin: "center",
+            duration: 0.25,
+            ease: "back.out(1.7)",
+          },
+          1.05 + i * 0.06,
+        );
+      });
+      master.to("#scene2Copy", { opacity: 1, duration: 0.3 }, 1.1);
+      master.to(
+        "#gemCenter",
+        { rotateY: 160, duration: 1.2, ease: "none" },
+        1.05,
+      );
+      master.to("#scene2Copy", { opacity: 0, duration: 0.3 }, 1.85);
+
+      /* --- Scene 3: first light / color refraction --- */
+      const refractColors = [
+        "#4869d6",
+        "#2f9d74",
+        "#c23c56",
+        "#8862c9",
+        "#e4c98c",
+      ];
+      master.to("#scene3Copy", { opacity: 1, duration: 0.3 }, 1.95);
+      facets.forEach((f, i) => {
+        const c = refractColors[i % refractColors.length];
+        master.to(f, { fill: c, duration: 0.3 }, 2.0 + (i % 5) * 0.08);
+      });
+      master.to(".cine-bg", { backgroundColor: "#0d1122", duration: 0.6 }, 2.0);
+      master.to(
+        "#gemCenter",
+        { rotateY: 300, duration: 1.0, ease: "none" },
+        1.95,
+      );
+      master.to("#scene3Copy", { opacity: 0, duration: 0.3 }, 2.75);
+
+      /* --- Scene 4: origin map --- */
+      master.to("#originLine", { opacity: 1, duration: 0.3 }, 2.8);
+      master.to("#scene4Copy", { opacity: 1, duration: 0.3 }, 2.85);
+      master.to("#gemCenter", { scale: 0.55, x: "-24vw", duration: 0.6 }, 2.8);
+      master.to(
+        "#originDot",
+        {
+          motionPath: {
+            path: "#originPath",
+            align: "#originPath",
+            autoRotate: false,
+          },
+          duration: 1.0,
+          ease: "none",
+        },
+        2.85,
+      );
+      master.to(
+        ["#originLine", "#scene4Copy"],
+        { opacity: 0, duration: 0.3 },
+        3.65,
+      );
+      master.to("#gemCenter", { scale: 1, x: "0vw", duration: 0.5 }, 3.65);
+
+      /* --- Scene 5: macro reveal --- */
+      master.to("#scene5Copy", { opacity: 1, duration: 0.3 }, 3.75);
+      master.to(
+        "#gemCenter",
+        { scale: 2.1, duration: 1.1, ease: "none" },
+        3.75,
+      );
+      master.to(".vignette", { opacity: 0.85, duration: 0.6 }, 3.8);
+      master.to("#scene5Copy", { opacity: 0, duration: 0.3 }, 4.6);
+      master.to("#gemCenter", { scale: 1, duration: 0.6 }, 4.6);
+      master.to(".vignette", { opacity: 1, duration: 0.4 }, 4.6);
+
+      /* progress rail dots */
+      const rail = document.createElement("div");
+      rail.className = "progress-rail";
+      for (let i = 0; i < 5; i++) {
+        const d = document.createElement("div");
+        d.className = "dot";
+        rail.appendChild(d);
+      }
+      document.body.appendChild(rail);
+      const railDots = rail.querySelectorAll(".dot");
+      ScrollTrigger.create({
+        trigger: "#cineWrap",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        onUpdate: (self) => {
+          const idx = Math.min(4, Math.floor(self.progress * 5));
+          railDots.forEach((d, i) => d.classList.toggle("active", i === idx));
+        },
+      });
+
+      /* ============ SCENE 6: ORBIT ============ */
+      const orbitTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".orbit-wrap",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+      });
+      orbitTl.to("#orbitCopy", { opacity: 1, duration: 0.3 }, 0);
+      orbitTl.to("#orbitCopy", { opacity: 0, duration: 0.3 }, 0.85);
+
+      const sats = [
+        { id: "sat0", radius: 140, startAngle: 0 },
+        { id: "sat1", radius: 140, startAngle: 72 },
+        { id: "sat2", radius: 210, startAngle: 144 },
+        { id: "sat3", radius: 210, startAngle: 216 },
+        { id: "sat4", radius: 140, startAngle: 288 },
+      ];
+      sats.forEach((s) => {
+        const el = document.getElementById(s.id);
+        const obj = { angle: s.startAngle };
+        orbitTl.to(
+          obj,
+          {
+            angle: s.startAngle + 360,
+            duration: 1,
+            ease: "none",
+            onUpdate: () => {
+              const rad = (obj.angle * Math.PI) / 180;
+              const x = Math.cos(rad) * s.radius;
+              const y = Math.sin(rad) * s.radius * 0.62;
+              gsap.set(el, { x, y });
+            },
+          },
+          0,
+        );
+      });
+      gsap.to("#ring1, #ring2", {
+        scrollTrigger: {
+          trigger: ".orbit-wrap",
+          start: "top center",
+          end: "top top",
+          scrub: true,
+        },
+        opacity: 1,
+      });
+
+      /* ============ SCENE 7: PORTFOLIO SPLIT ============ */
+      const splitTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".split-wrap",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+      });
+      splitTl.to("#splitCopy", { opacity: 1, duration: 0.2 }, 0);
+      splitTl.to("#splitCopy", { opacity: 0, duration: 0.2 }, 0.7);
+      splitTl.to(
+        "#splitCenter",
+        { opacity: 0, scale: 0.4, duration: 0.3 },
+        0.15,
+      );
+
+      const cardPositions = [
+        { id: "card0", x: "-34vw", y: "-14vh", rot: -4 },
+        { id: "card1", x: "-16vw", y: "8vh", rot: 2 },
+        { id: "card2", x: "0vw", y: "-20vh", rot: -2 },
+        { id: "card3", x: "16vw", y: "8vh", rot: 3 },
+        { id: "card4", x: "34vw", y: "-10vh", rot: -3 },
+      ];
+      cardPositions.forEach((c, i) => {
+        splitTl.to(
+          "#" + c.id,
+          {
+            opacity: 1,
+            x: c.x,
+            y: c.y,
+            rotate: c.rot,
+            duration: 0.35,
+            ease: "power2.out",
+          },
+          0.2 + i * 0.1,
+        );
+      });
+
+      /* ============ Ambient idle rotation for pinned gem when not scrolling ============ */
+      gsap.set("#gemCenter", {
+        transformPerspective: 800,
+        transformStyle: "preserve-3d",
+      });
+    </script>
+  </body>
+</html>
