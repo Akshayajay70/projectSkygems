@@ -1,0 +1,879 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SKY GEMS | Architects of Rare Beauty</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&amp;family=Playfair+Display:wght@400;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-dim": "#101419",
+              "on-secondary-fixed": "#241a00",
+              "on-secondary": "#3c2f00",
+              "surface-tint": "#c1c6d5",
+              "inverse-on-surface": "#2d3137",
+              outline: "#909096",
+              "on-tertiary-fixed-variant": "#474743",
+              "surface-container-highest": "#31353c",
+              "secondary-container": "#af8d11",
+              "on-secondary-fixed-variant": "#574500",
+              "on-tertiary-fixed": "#1c1c18",
+              "tertiary-fixed": "#e5e2dc",
+              "on-surface-variant": "#c6c6cc",
+              "outline-variant": "#45474b",
+              "primary-fixed-dim": "#c1c6d5",
+              "surface-container": "#1c2026",
+              "on-tertiary-container": "#7a7975",
+              "tertiary-container": "#0a0a07",
+              background: "#101419",
+              "surface-container-high": "#262a31",
+              "on-primary": "#2b313c",
+              "tertiary-fixed-dim": "#c9c6c1",
+              "on-surface": "#e0e2eb",
+              "primary-container": "#050a14",
+              "surface-bright": "#363940",
+              "error-container": "#93000a",
+              "primary-fixed": "#dde2f1",
+              surface: "#101419",
+              "secondary-fixed-dim": "#e9c349",
+              secondary: "#e9c349",
+              error: "#ffb4ab",
+              "on-primary-container": "#747987",
+              "secondary-fixed": "#ffe088",
+              "inverse-surface": "#e0e2eb",
+              primary: "#c1c6d5",
+              "on-primary-fixed-variant": "#414753",
+              "on-error-container": "#ffdad6",
+              "on-tertiary": "#31312d",
+              tertiary: "#c9c6c1",
+              "on-primary-fixed": "#161c26",
+              "surface-container-low": "#181c22",
+              "on-background": "#e0e2eb",
+              "on-secondary-container": "#342800",
+              "inverse-primary": "#595e6b",
+              "on-error": "#690005",
+              "surface-variant": "#31353c",
+              "surface-container-lowest": "#0b0e14",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "stack-md": "2rem",
+              "stack-lg": "4rem",
+              "stack-xl": "8rem",
+              "stack-sm": "1rem",
+              "margin-page": "5vw",
+              gutter: "2rem",
+            },
+            fontFamily: {
+              "body-md": ["Montserrat"],
+              "display-lg-mobile": ["Playfair Display"],
+              "headline-lg": ["Playfair Display"],
+              "headline-md": ["Playfair Display"],
+              "display-lg": ["Playfair Display"],
+              "body-lg": ["Montserrat"],
+              "label-caps": ["Montserrat"],
+              "headline-lg-mobile": ["Playfair Display"],
+            },
+            fontSize: {
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "display-lg-mobile": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "headline-lg": [
+                "48px",
+                { lineHeight: "56px", fontWeight: "400" },
+              ],
+              "headline-md": [
+                "32px",
+                { lineHeight: "40px", fontWeight: "400" },
+              ],
+              "display-lg": [
+                "80px",
+                {
+                  lineHeight: "96px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "400",
+                },
+              ],
+              "body-lg": [
+                "18px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "300",
+                },
+              ],
+              "label-caps": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.2em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg-mobile": [
+                "32px",
+                { lineHeight: "40px", fontWeight: "400" },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #0b0e14;
+        color: #e0e2eb;
+        overflow-x: hidden;
+      }
+      .glass-overlay {
+        background: linear-gradient(
+          135deg,
+          rgba(11, 14, 20, 0.4) 0%,
+          rgba(5, 10, 20, 0.8) 100%
+        );
+        backdrop-filter: blur(12px);
+      }
+      .gold-border {
+        border: 1px solid rgba(233, 195, 73, 0.3);
+      }
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 1s ease-out,
+          transform 1s ease-out;
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .scale-on-scroll {
+        transform: scale(0.95);
+        transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .scale-on-scroll.visible {
+        transform: scale(1);
+      }
+    </style>
+  </head>
+  <body class="font-body-md bg-surface-container-lowest text-on-surface">
+    <!-- Global Shader Background -->
+    <div
+      class="fixed inset-0 z-0 opacity-40 pointer-events-none mix-blend-screen"
+    >
+      <!-- STITCH_SHADER_START:ANIMATION_10 class="absolute inset-0 w-full h-full" -->
+      <div class="absolute inset-0 w-full h-full" style="display: block">
+        <canvas
+          id="shader-canvas-ANIMATION_10"
+          style="display: block; width: 100%; height: 100%"
+        ></canvas>
+        <script>
+          (function () {
+            const canvas = document.getElementById(
+              "shader-canvas-ANIMATION_10",
+            );
+
+            // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+            // This fires on initial layout and whenever the element is resized.
+            function syncSize() {
+              const w = canvas.clientWidth || 1280;
+              const h = canvas.clientHeight || 720;
+              if (canvas.width !== w || canvas.height !== h) {
+                canvas.width = w;
+                canvas.height = h;
+              }
+            }
+            if (typeof ResizeObserver !== "undefined") {
+              new ResizeObserver(syncSize).observe(canvas);
+            }
+            syncSize();
+
+            const gl =
+              canvas.getContext("webgl") ||
+              canvas.getContext("experimental-webgl");
+            if (!gl) return;
+            const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+            const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+
+void main() {
+    vec2 uv = v_texCoord;
+    
+    // Slow, drifting noise-like movement
+    float n = sin(uv.x * 3.0 + u_time * 0.2) * cos(uv.y * 3.0 - u_time * 0.15);
+    n += sin(uv.y * 2.0 + u_time * 0.3) * 0.5;
+    
+    // Base colors derived from the Celestial Heritage palette
+    vec3 deepNavy = vec3(0.04, 0.05, 0.08); // #0b0e14
+    vec3 emeraldTint = vec3(0.06, 0.12, 0.1); // Subtle deep emerald
+    vec3 champagneGlow = vec3(0.85, 0.75, 0.5); // Champagne/Gold accent
+    
+    // Mix colors based on noise
+    vec3 color = mix(deepNavy, emeraldTint, n * 0.3 + 0.3);
+    
+    // Add "shimmer" particles
+    float shimmer = pow(fract(sin(dot(uv + u_time * 0.01, vec2(12.9898, 78.233))) * 43758.5453), 20.0);
+    color += champagneGlow * shimmer * 0.15;
+    
+    gl_FragColor = vec4(color, 1.0);
+}`;
+            function cs(type, src) {
+              const s = gl.createShader(type);
+              gl.shaderSource(s, src);
+              gl.compileShader(s);
+              return s;
+            }
+            const prog = gl.createProgram();
+            gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+            gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+            gl.linkProgram(prog);
+            gl.useProgram(prog);
+            const buf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.bufferData(
+              gl.ARRAY_BUFFER,
+              new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
+              gl.STATIC_DRAW,
+            );
+            const pos = gl.getAttribLocation(prog, "a_position");
+            gl.enableVertexAttribArray(pos);
+            gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+            const uTime = gl.getUniformLocation(prog, "u_time");
+            const uRes = gl.getUniformLocation(prog, "u_resolution");
+            const uMouse = gl.getUniformLocation(prog, "u_mouse");
+
+            // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+            // Shaders that need normalized coords should use: u_mouse / u_resolution.
+            let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+            window.addEventListener("mousemove", (event) => {
+              const rect = canvas.getBoundingClientRect();
+              if (rect.width && rect.height) {
+                const nx = (event.clientX - rect.left) / rect.width;
+                const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+                mouse.x = nx * canvas.width;
+                mouse.y = ny * canvas.height;
+              }
+            });
+
+            function render(t) {
+              if (typeof ResizeObserver === "undefined") syncSize();
+              gl.viewport(0, 0, canvas.width, canvas.height);
+              if (uTime) gl.uniform1f(uTime, t * 0.001);
+              if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+              if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+              gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+              requestAnimationFrame(render);
+            }
+            render(0);
+          })();
+        </script>
+      </div>
+      <!-- STITCH_SHADER_END:ANIMATION_10 -->
+    </div>
+    <!-- TopNavBar -->
+    <nav
+      class="fixed top-0 w-full z-50 bg-background/40 backdrop-blur-3xl border-b border-secondary/30 transition-all duration-300"
+      id="navbar"
+    >
+      <div class="flex justify-between items-center w-full px-margin-page py-6">
+        <div
+          class="font-display-lg text-headline-md tracking-widest text-on-surface hover:text-secondary transition-colors duration-500 cursor-pointer"
+        >
+          SKY GEMS
+        </div>
+        <div class="hidden md:flex items-center space-x-gutter">
+          <a
+            class="font-label-caps text-label-caps text-on-surface/70 hover:text-secondary transition-colors duration-500 uppercase"
+            href="#collections"
+            >Collections</a
+          >
+          <a
+            class="font-label-caps text-label-caps text-secondary border-b border-secondary pb-1 uppercase"
+            href="#origins"
+            >Origins</a
+          >
+          <a
+            class="font-label-caps text-label-caps text-on-surface/70 hover:text-secondary transition-colors duration-500 uppercase"
+            href="#philosophy"
+            >Philosophy</a
+          >
+          <a
+            class="font-label-caps text-label-caps text-on-surface/70 hover:text-secondary transition-colors duration-500 uppercase"
+            href="#expertise"
+            >Expertise</a
+          >
+          <a
+            class="font-label-caps text-label-caps text-on-surface/70 hover:text-secondary transition-colors duration-500 uppercase"
+            href="#journal"
+            >Journal</a
+          >
+        </div>
+        <button
+          class="hidden md:block px-6 py-3 bg-transparent border border-secondary text-secondary font-label-caps text-label-caps hover:bg-secondary/10 transition-colors duration-300 uppercase"
+        >
+          Inquire
+        </button>
+        <!-- Mobile Menu Toggle -->
+        <button
+          class="md:hidden text-on-surface hover:text-secondary transition-colors duration-300"
+        >
+          <span class="material-symbols-outlined text-3xl">menu</span>
+        </button>
+      </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="relative z-10">
+      <!-- Hero Section -->
+      <section
+        class="relative min-h-screen flex items-center justify-center pt-stack-xl pb-stack-lg px-margin-page overflow-hidden"
+      >
+        <div class="absolute inset-0 z-0">
+          <div
+            class="w-full h-full bg-cover bg-center opacity-60 scale-on-scroll"
+            data-alt="A macro photograph of an exceptionally rare, deep blue sapphire gemstone, brilliantly cut, resting on a polished dark surface reflecting its facets. The lighting is dramatic and moody, creating a luxurious editorial aesthetic against a near-black void."
+            style="
+              background-image: url(&quot;https://lh3.googleusercontent.com/aida/AEtjO1Vwb-b0PH8qKn905t3hXAQw_o2mrjEzPlXiu_bYIjWTpHhuFJPgK7-SehYm5gNYUL23SZYAliTJckq62S97R8_y6kt93DNNVFXTCzoe0TFjgNeiClwIIUm_f4IAGo7OyN1PEzd35nf70nPh9_IBkX5Ypr7AA54_tVSHDxLK9syb7AHaIeIjE8G59KWVWK_t7nbV7Ddqq-S5q3KEnqqDqXO4OyaBvUl9GY2R_p7Tk7TZal1h3Ez0s6D755po&quot;);
+            "
+          ></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/50 to-transparent"
+          ></div>
+        </div>
+        <div
+          class="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center"
+        >
+          <h1
+            class="font-display-lg md:text-display-lg text-display-lg-mobile text-on-surface mb-stack-sm fade-in-up"
+          >
+            Rare Stones.<br /><span class="text-secondary italic font-light"
+              >Timeless Beauty.</span
+            >
+          </h1>
+          <p
+            class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-stack-md fade-in-up"
+            style="transition-delay: 200ms"
+          >
+            Discover a private collection where nature's rarest treasures are
+            curated with passion and expertise.
+          </p>
+          <button
+            class="px-8 py-4 bg-secondary text-on-secondary font-label-caps text-label-caps hover:bg-secondary-fixed transition-colors duration-300 uppercase fade-in-up"
+            style="transition-delay: 400ms"
+          >
+            Explore Collection
+          </button>
+        </div>
+      </section>
+      <!-- About the Owner -->
+      <section
+        class="py-stack-xl px-margin-page bg-surface-container-lowest"
+        id="philosophy"
+      >
+        <div
+          class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-stack-md items-center"
+        >
+          <div
+            class="order-2 md:order-1 flex flex-col space-y-stack-sm fade-in-up"
+          >
+            <span
+              class="font-label-caps text-label-caps text-secondary uppercase tracking-widest"
+              >The Curator</span
+            >
+            <h2
+              class="font-headline-lg md:text-headline-lg text-headline-lg-mobile text-on-surface"
+            >
+              A Life Dedicated to Rarity
+            </h2>
+            <p
+              class="font-body-md text-body-md text-on-surface-variant leading-relaxed"
+            >
+              "My journey into the heart of the Earth began thirty years ago. I
+              sought not just stones, but stories whispered in the depths of
+              time. Every gem in this collection has been hand-selected,
+              scrutinized under the lens of unwavering standards, and sourced
+              with a profound respect for its origin."
+            </p>
+            <p
+              class="font-body-md text-body-md text-on-surface-variant leading-relaxed pb-4"
+            >
+              We believe true luxury is born of nature's scarcity and refined by
+              masterful craftsmanship. It is a privilege to share these
+              extraordinary fragments of the Earth with those who appreciate
+              authentic, unyielding beauty.
+            </p>
+            <div class="pt-4 border-t border-secondary/20 w-32">
+              <img
+                class="h-12 opacity-80"
+                data-alt="An elegant, stylized signature in gold ink, representing Alexander, the curator of Sky Gems."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVOz4GzXAL1sF8QzQjYn10bC-_fuAd6_ed9OoR-AKOJEmDC73CqBzRHx6bNNhq4d87sH8T7BEWpIM48mzdTt4jSfiD58A6hwnpgrUHsDOaNpUGyNAElXAhMb5rWteS9flKNG6-CgbHmBvkHH1gatZ-urP21DFNqlyzYmETEcoaOKgX0n27pKVh6MdJwB1RIBzxm6dV40vanZoQmh5b6DUrzV1K9gp4ENCj0pFAZkE8FnW7ooS_-kyBXA"
+              />
+            </div>
+          </div>
+          <div
+            class="order-1 md:order-2 relative h-[600px] w-full gold-border p-4 fade-in-up"
+            style="transition-delay: 200ms"
+          >
+            <div
+              class="w-full h-full bg-cover bg-center scale-on-scroll"
+              data-alt="A distinguished, silver-haired gentleman in a sharp charcoal suit, meticulously examining a loose gemstone through a jeweler's loupe. He sits at a rich mahogany desk in a dimly lit, luxurious study with dark navy paneled walls. A velvet-lined mahogany box rests nearby. The atmosphere is quiet, intense, and deeply sophisticated."
+              style="
+                background-image: url(&quot;https://lh3.googleusercontent.com/aida/AEtjO1XueFpbN382bieyGt2MocAOA69ISSGN6Lsk2UNvf81gkciGBnAQdqj3RvUmj7ed93aWU_fHPDOA-IZeV--6OF7oVu54JfBKx04WvZXyTfBuEVeOegDBX1jRzHpSn0tzXiogOkJfpdYMCLWXH7qNS9u6abHzSKs_j-7xx_bvb4GnV4SJwd_Ag2Kps0yeeJHmoj8rgLF64Labqm7Dxz0Q1y3skaFp83qs5w74LWa3-vV3KuKRh-IeaxEotrU&quot;);
+              "
+            ></div>
+          </div>
+        </div>
+      </section>
+      <!-- About the Stones (Grid) -->
+      <section
+        class="py-stack-xl px-margin-page bg-surface-dim relative"
+        id="origins"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-stack-lg fade-in-up">
+            <span
+              class="font-label-caps text-label-caps text-secondary uppercase tracking-widest mb-4 block"
+              >Origins &amp; Rarity</span
+            >
+            <h2
+              class="font-headline-lg md:text-headline-lg text-headline-lg-mobile text-on-surface"
+            >
+              Treasures of the Earth
+            </h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+            <!-- Ruby -->
+            <div class="group relative flex flex-col items-center fade-in-up">
+              <div
+                class="w-full aspect-square overflow-hidden mb-6 gold-border bg-background"
+              >
+                <img
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  data-alt="A flawless, deep pigeon-blood red ruby, oval cut, resting delicately on a plush, dark grey velvet surface. The macro photography highlights the internal fire and perfect facets against a pure black background."
+                  src="https://lh3.googleusercontent.com/aida/AEtjO1Xtb3yJtDNGOP4QGrmzJtKSrf6-Cl85FOv7wJpWfch_Cqn27-nN5UpgRfxgCf2fVH4wLPRUv5Q-qoFXdGN8LLoGkSJjDCGcm-BuGDQvXAuXT76Tf21e9lpF23yKkdyW7yqrE_kb_QteArOhBxf8o7gLonLBpAKKhul4MTDMZUriu_Iti1NyCncJnqhUPKa-5Bh58cpcOU1fMfGE7CpKRpDi0YyWU5ElMMX19dIOvd9Qt0kAcnroJfgf2Xw"
+                />
+              </div>
+              <h3
+                class="font-headline-md text-headline-md text-on-surface mb-2"
+              >
+                Burmese Ruby
+              </h3>
+              <p
+                class="font-body-md text-body-md text-on-surface-variant text-center px-4"
+              >
+                Sourced from the legendary Mogok valley. Renowned for their
+                'pigeon's blood' hue and intense fluorescence.
+              </p>
+            </div>
+            <!-- Emerald -->
+            <div
+              class="group relative flex flex-col items-center fade-in-up"
+              style="transition-delay: 200ms"
+            >
+              <div
+                class="w-full aspect-square overflow-hidden mb-6 gold-border bg-background mt-0 md:mt-12"
+              >
+                <img
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  data-alt="A vivid, deeply saturated Colombian emerald, emerald cut, sitting on a textured dark slate surface. The stone exhibits a mesmerizing internal jardin and a rich, glowing green hue under precise studio lighting."
+                  src="https://lh3.googleusercontent.com/aida/AEtjO1WvQza23jgZK9BfGsKUXcT6PVVXC3ICeQF-dH7uBrAaaL_C7otx3iZ5veiQuhDrgO_P8PesqqmJLl8GDfe_PwVjSIkMlhjOHIitZ7FNqs52aNzQF0J75j_CGbdgVK3-ZaJ4Aap5gTuiDmm2m3uDlEcn0UUuCZv8ThWdxX-qGqfMcqwQAd3AeMsbb5FC18MpTY8OifWlRk4yekt7WHNsU_aPLexhspaKbcHCSopuqQgxeV537RZWPsXrP9DK"
+                />
+              </div>
+              <h3
+                class="font-headline-md text-headline-md text-on-surface mb-2"
+              >
+                Colombian Emerald
+              </h3>
+              <p
+                class="font-body-md text-body-md text-on-surface-variant text-center px-4"
+              >
+                From the Muzo mines, exhibiting a pure, vibrant green with the
+                delicate internal 'jardin' that marks true authenticity.
+              </p>
+            </div>
+            <!-- Paraiba -->
+            <div
+              class="group relative flex flex-col items-center fade-in-up"
+              style="transition-delay: 400ms"
+            >
+              <div
+                class="w-full aspect-square overflow-hidden mb-6 gold-border bg-background"
+              >
+                <img
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  data-alt="A rare Paraiba Tourmaline, radiating a neon, electric blue-green glow. The macro shot captures its exceptional brilliance and unique hue against a pristine dark background, emphasizing its luxury and rarity."
+                  src="https://lh3.googleusercontent.com/aida/AEtjO1U--PTs4aCnMhGPZJdlGimmNd4B2VC2FYTBtHwFO3yuDiYyj2p1wVnXJTpVEtp4XEZo7Va1N0ntHMVKAxGyQVvSzkVY42SuD3zVPXRqPRLWxNg-RG89--afdJwik3LQtcuLI4udxTWulditnBwTfKhVDhGZ6VkIE5pGFR8t7afb5EU4cKku8lH7xsUYxI04TH77mnTEkgmwwfCHclkfb4OM8nwwy9Yg7IS97mXd4Mtv42C1ynnN68qsNkag"
+                />
+              </div>
+              <h3
+                class="font-headline-md text-headline-md text-on-surface mb-2"
+              >
+                Paraiba Tourmaline
+              </h3>
+              <p
+                class="font-body-md text-body-md text-on-surface-variant text-center px-4"
+              >
+                Discovered in Brazil, radiating an electrifying neon blue-green
+                glow. A true geological anomaly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Featured Collection Gallery (Masonry) -->
+      <section
+        class="py-stack-xl px-margin-page bg-surface-container-lowest"
+        id="collections"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div class="flex justify-between items-end mb-stack-md fade-in-up">
+            <div>
+              <span
+                class="font-label-caps text-label-caps text-secondary uppercase tracking-widest mb-4 block"
+                >The Vault</span
+              >
+              <h2
+                class="font-headline-lg md:text-headline-lg text-headline-lg-mobile text-on-surface"
+              >
+                Recent Acquisitions
+              </h2>
+            </div>
+            <a
+              class="hidden md:inline-flex items-center space-x-2 text-secondary hover:text-secondary-fixed transition-colors"
+              href="#"
+            >
+              <span class="font-label-caps text-label-caps uppercase"
+                >View All</span
+              >
+              <span class="material-symbols-outlined text-sm"
+                >arrow_forward</span
+              >
+            </a>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Item 1 (Golden Beryl) -->
+            <div
+              class="relative group overflow-hidden bg-surface-dim h-[600px] fade-in-up"
+            >
+              <img
+                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                data-alt="A macro photo of a stunning Golden Beryl (Heliodor) gemstone, honey yellow color, brilliant cut. The stone is set against a dark background under perfect studio lighting, showcasing its luxurious clarity and facets."
+                src="https://lh3.googleusercontent.com/aida/AEtjO1UzeQYTdaFGsjND2nMGoBPRTybLymtvt1dkIqQblVvfHla0T3Nt88HXrY8-WnPzPkTn3weOqgj8IqEGo0VllJ8fPC-sLlptuzgHBZiqTtBvKrVdUNdBty6VjD4S4-6TXl1Y-my2VZaEyLvagm8iCsI-hERyVaFgthxcU4wkzX9iRklhMe-RMGFO-Rs84h676NX09IVU13ykaRL2UEU9FHoYlNpXHHzWxNF3Kt8n2gK5559aJchvAdozlud7"
+              />
+              <div
+                class="absolute inset-0 bg-primary-container/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8 backdrop-blur-sm"
+              >
+                <div
+                  class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
+                >
+                  <h4
+                    class="font-headline-md text-headline-md text-on-surface mb-1"
+                  >
+                    Golden Beryl
+                  </h4>
+                  <div
+                    class="flex items-center space-x-4 text-secondary font-label-caps text-label-caps uppercase"
+                  >
+                    <span>12.4 Carats</span>
+                    <span class="w-1 h-1 bg-secondary rounded-full"></span>
+                    <span>Madagascar</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Item 2 (Placeholder for layout) -->
+            <div
+              class="relative group overflow-hidden bg-surface-dim h-[600px] fade-in-up"
+              style="transition-delay: 200ms"
+            >
+              <img
+                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                data-alt="A dazzling, unheated Padparadscha sapphire showcasing a delicate blend of pink and orange hues, reminiscent of a lotus blossom. The stone is meticulously cut and photographed against a sleek, dark background, exuding high-end luxury."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOB9mOPvh1SKzwcefQWhHIp_QSMaO7tz8Pu0sSC91qBNJFOEfS_U7B6nX-Z0euT2lbFF2Xiy98-OE7cZCNeXP7QyYUzWKGgoBUyYBvuiP56gP21KcwFHUzLiuqhTIpLDes3KRQDk-WoVcT-d4gQFqmcelUVcmtQk3-Q5PIWj2NhlA7G65MbULqJNd5_VhzQzJhY97xU24B-MovC48asA8SbqlQ0tAzRHgLZk-Ci6T2yAF5CC34t4ce_g"
+              />
+              <div
+                class="absolute inset-0 bg-primary-container/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8 backdrop-blur-sm"
+              >
+                <div
+                  class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
+                >
+                  <h4
+                    class="font-headline-md text-headline-md text-on-surface mb-1"
+                  >
+                    Padparadscha Sapphire
+                  </h4>
+                  <div
+                    class="flex items-center space-x-4 text-secondary font-label-caps text-label-caps uppercase"
+                  >
+                    <span>4.2 Carats</span>
+                    <span class="w-1 h-1 bg-secondary rounded-full"></span>
+                    <span>Sri Lanka</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Craftsmanship & Sourcing -->
+      <section
+        class="py-stack-xl px-margin-page bg-surface-dim border-y border-secondary/10"
+        id="expertise"
+      >
+        <div class="max-w-5xl mx-auto text-center fade-in-up">
+          <span
+            class="material-symbols-outlined text-secondary text-5xl mb-6 font-light"
+            >diamond</span
+          >
+          <h2
+            class="font-headline-lg md:text-headline-lg text-headline-lg-mobile text-on-surface mb-stack-sm"
+          >
+            Uncompromising Standards
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md text-left">
+            <div class="flex flex-col items-center text-center">
+              <div
+                class="w-16 h-16 rounded-full border border-secondary flex items-center justify-center mb-6"
+              >
+                <span class="material-symbols-outlined text-secondary"
+                  >explore</span
+                >
+              </div>
+              <h4
+                class="font-body-lg text-body-lg text-on-surface mb-2 font-semibold"
+              >
+                Ethical Provenance
+              </h4>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                Traceable origins ensuring responsible mining practices and
+                community support.
+              </p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div
+                class="w-16 h-16 rounded-full border border-secondary flex items-center justify-center mb-6"
+              >
+                <span class="material-symbols-outlined text-secondary"
+                  >verified</span
+                >
+              </div>
+              <h4
+                class="font-body-lg text-body-lg text-on-surface mb-2 font-semibold"
+              >
+                Independent Certification
+              </h4>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                Every gem is accompanied by reports from globally recognized
+                gemological laboratories.
+              </p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div
+                class="w-16 h-16 rounded-full border border-secondary flex items-center justify-center mb-6"
+              >
+                <span class="material-symbols-outlined text-secondary"
+                  >handyman</span
+                >
+              </div>
+              <h4
+                class="font-body-lg text-body-lg text-on-surface mb-2 font-semibold"
+              >
+                Master Cutting
+              </h4>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                Proportions tailored not for weight retention, but for maximum
+                brilliance and life.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Inquiry Form -->
+      <section
+        class="py-stack-xl px-margin-page bg-surface-container-lowest relative overflow-hidden"
+      >
+        <div
+          class="absolute right-0 top-0 w-1/2 h-full opacity-10 pointer-events-none"
+        >
+          <img
+            class="w-full h-full object-cover"
+            data-alt="Abstract, flowing gold and deep blue liquid textures swirling together, creating a sense of luxurious mystery and depth, suitable for a subtle background element in a high-end design."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCglaOIInxLUru5IZkjxSQUjtOQuCHsrpmUAg6BfA1_HQb_u7xmbExNZhh2IUVYzI7hg8NkbtuGPd6A2d7Ps03WKLcpn_BzXEcbPqOb3Vyd25sEbsSKmVbRRm8xTfnOTTr5J2vkyPr4_LTDhW88UXQEq4TsI6CRgXUBc7d0wsTd11O8CtsharsxdaVCxUq0UNM6gmvO9sq1_uqya_B4JserIwZdP6XUbEyLqX-uAh0vZQOa4mLw8OPvOA"
+          />
+        </div>
+        <div class="max-w-2xl mx-auto relative z-10 fade-in-up">
+          <div class="text-center mb-stack-md">
+            <h2
+              class="font-headline-lg md:text-headline-lg text-headline-lg-mobile text-on-surface mb-4"
+            >
+              Bespoke Inquiries
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Arrange a private viewing or request a custom sourcing commission.
+            </p>
+          </div>
+          <form class="space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <input
+                  class="w-full bg-transparent border-0 border-b border-secondary/30 text-on-surface font-body-md text-body-md focus:ring-0 focus:border-secondary transition-colors py-2 px-0 placeholder:text-on-surface-variant/50"
+                  placeholder="Name"
+                  type="text"
+                />
+              </div>
+              <div>
+                <input
+                  class="w-full bg-transparent border-0 border-b border-secondary/30 text-on-surface font-body-md text-body-md focus:ring-0 focus:border-secondary transition-colors py-2 px-0 placeholder:text-on-surface-variant/50"
+                  placeholder="Email Address"
+                  type="email"
+                />
+              </div>
+            </div>
+            <div>
+              <select
+                class="w-full bg-transparent border-0 border-b border-secondary/30 text-on-surface font-body-md text-body-md focus:ring-0 focus:border-secondary transition-colors py-2 px-0"
+              >
+                <option class="bg-surface-dim" disabled="" selected="" value="">
+                  Nature of Inquiry
+                </option>
+                <option class="bg-surface-dim" value="viewing">
+                  Private Viewing
+                </option>
+                <option class="bg-surface-dim" value="sourcing">
+                  Custom Sourcing
+                </option>
+                <option class="bg-surface-dim" value="general">
+                  General Inquiry
+                </option>
+              </select>
+            </div>
+            <div>
+              <textarea
+                class="w-full bg-transparent border-0 border-b border-secondary/30 text-on-surface font-body-md text-body-md focus:ring-0 focus:border-secondary transition-colors py-2 px-0 placeholder:text-on-surface-variant/50 resize-none"
+                placeholder="Message"
+                rows="4"
+              ></textarea>
+            </div>
+            <div class="text-center pt-4">
+              <button
+                class="px-12 py-4 bg-transparent border border-secondary text-secondary font-label-caps text-label-caps hover:bg-secondary hover:text-on-secondary transition-all duration-300 uppercase w-full md:w-auto"
+                type="submit"
+              >
+                Submit Request
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="w-full pt-stack-xl pb-stack-md bg-surface-container-lowest px-margin-page border-t border-secondary/10 flex flex-col items-center justify-center space-y-stack-md z-10 relative"
+    >
+      <div class="font-display-lg text-headline-lg text-secondary">
+        SKY GEMS
+      </div>
+      <div class="flex flex-wrap justify-center gap-6 md:gap-12">
+        <a
+          class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-300"
+          href="#"
+          >Private Viewings</a
+        >
+        <a
+          class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-300"
+          href="#"
+          >Ethical Sourcing</a
+        >
+        <a
+          class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-300"
+          href="#"
+          >Legal</a
+        >
+        <a
+          class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-300"
+          href="#"
+          >Press</a
+        >
+        <a
+          class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-300"
+          href="#"
+          >Contact</a
+        >
+      </div>
+      <div
+        class="font-body-md text-body-md text-on-surface-variant/50 text-sm mt-8"
+      >
+        © 2024 SKY GEMS. ARCHITECTS OF RARE BEAUTY.
+      </div>
+    </footer>
+    <script>
+      // Navbar scroll effect
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("bg-background/80", "shadow-lg");
+          navbar.classList.remove("bg-background/40");
+        } else {
+          navbar.classList.remove("bg-background/80", "shadow-lg");
+          navbar.classList.add("bg-background/40");
+        }
+      });
+
+      // Intersection Observer for scroll animations
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document
+        .querySelectorAll(".fade-in-up, .scale-on-scroll")
+        .forEach((element) => {
+          observer.observe(element);
+        });
+    </script>
+  </body>
+</html>
