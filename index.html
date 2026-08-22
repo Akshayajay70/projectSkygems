@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SKY</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: white;
+      }
+
+      .container {
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 4rem;
+        margin-bottom: 10px;
+      }
+
+      p {
+        color: #94a3b8;
+        margin-bottom: 40px;
+      }
+
+      .websites {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 300px;
+      }
+
+      .website-btn {
+        display: block;
+        padding: 15px 20px;
+        border-radius: 10px;
+        background: #1e293b;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        border: 1px solid #334155;
+        transition: 0.2s ease;
+      }
+
+      .website-btn:hover {
+        background: #334155;
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="container">
+      <h1>SKY</h1>
+      <p>Select a website</p>
+
+      <div class="websites">
+        <a
+          class="website-btn"
+          href="./gsap.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Website one
+        </a>
+
+        <a
+          class="website-btn"
+          href="./stitch.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Website two
+        </a>
+
+        <a
+          class="website-btn"
+          href="https://github.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+
+        <a
+          class="website-btn"
+          href="https://stackoverflow.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Stack Overflow
+        </a>
+      </div>
+    </main>
+  </body>
+</html>
